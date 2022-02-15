@@ -1,5 +1,5 @@
 local function isempty(s)
-  return s == nil or s == '' or 0 == s
+  return s == nil or s == '' or s == 0
 end
 
 local handle_after_place = function(pos, placer, itemstack, pointed_thing)
