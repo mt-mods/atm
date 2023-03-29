@@ -7,6 +7,8 @@ local handle_after_place = function(pos, placer, itemstack, pointed_thing)
   local meta = minetest.get_meta(pos)
   local owner = placer:get_player_name()
   meta:set_string("owner", owner)
+  -- Ensure owner's account exists
+  atm.read_account(owner)
 end
 
 local tube_config = {
