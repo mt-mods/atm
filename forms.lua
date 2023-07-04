@@ -117,7 +117,7 @@ function atm.showform3 (player)
 	end
 	if mg100_exists then
 		xplus = xplus + 1.5
-		listx = listx + 0.5
+		listx = listx + 0.75
 		cols = cols + 1
 		gap = 0.5
 	end
