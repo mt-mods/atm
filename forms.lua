@@ -14,6 +14,9 @@ local mg = function(count, str)
 	end
 end
 
+-- abbreviation/symbol of the currency
+local MONEY_SYMBOL = "Mg" -- Mg = Minegeld
+
 local denominations = { 1, 5, 10 }
 if mg50_exists then
 	table.insert(denominations, 50)
@@ -53,9 +56,7 @@ function atm.showform (player)
 	default.gui_bg..
 	default.gui_bg_img..
 	default.gui_slots..
-	"label[1.5,0.5;Money input]" ..
-	"label[5.5,0.5;Money output]" ..
-	"label[2.5,0.15;Your account balance: $".. atm.balance[player:get_player_name()].. "]" ..
+	"label[2.5,0.15;Your account balance: ".. atm.balance[player:get_player_name()].. " " .. MONEY_SYMBOL .."]" ..
 	"button_exit[2.5,1.5;1,2;Quit;Quit]" ..
 	create_currency_buttons(3, 1, 0.5, 1, 1) ..
 	"list[current_player;main;0,4.25;8,1;]"..
@@ -87,7 +88,7 @@ function atm.showform2 (player)
 	default.gui_slots..
 	"label[1.25,0.5;Money input]" ..
 	"label["..(5.25+xplus)..",0.5;Money output]" ..
-	"label[2.5,0.15;Your account balance: $".. atm.balance[player:get_player_name()].. "]" ..
+	"label[2.5,0.15;Your account balance: ".. atm.balance[player:get_player_name()].. " " .. MONEY_SYMBOL .. "]" ..
 	"button_exit["..(4+xplus)..",2.5;1,2;Quit;Quit]" ..
 	create_currency_buttons(cols, 2, startx, 1, 1) ..
 	"list[current_player;main;"..(listx)..",4.25;8,1;]"..
@@ -134,7 +135,7 @@ function atm.showform3 (player)
 	default.gui_slots..
 	"label[1.25,0.5;Money input]" ..
 	"label["..(5.75+xplus_out)..",0.5;Money output]" ..
-	"label[2.5,0.15;Your account balance: $".. atm.balance[player:get_player_name()].. "]" ..
+	"label[2.5,0.15;Your account balance: ".. atm.balance[player:get_player_name()].. " " .. MONEY_SYMBOL .. "]" ..
 	"button_exit["..(7+xplus)..",-0.5;1,2;Quit;Quit]" ..
 	create_currency_buttons(cols, 3, xstart, 1, gap) ..
 	"list[current_player;main;"..listx..",4.25;8,1;]"..
@@ -158,7 +159,7 @@ function atm.showform_wt (player)
 	default.gui_slots..
 	"button[5.75,0;2,1;transactions;Transactions >]" ..
 	"label[2.5,0;Wire Transfer Terminal]" ..
-	"label[2,0.5;Your account balance: $".. atm.balance[player:get_player_name()].. "]" ..
+	"label[2,0.5;Your account balance: ".. atm.balance[player:get_player_name()].. " " .. MONEY_SYMBOL .. "]" ..
 	"field[0.5,1.5;5,1;dstn;Recepient:;]"..
 	"field[6,1.5;2,1;amnt;Amount:;]"..
 	"field[0.5,3;7.5,1;desc;Description:;]"..
@@ -177,7 +178,7 @@ function atm.showform_wtconf (player, dstn, amnt, desc)
 	default.gui_bg_img..
 	default.gui_slots..
 	"label[2.5,0;Wire Transfer Terminal]" ..
-	"label[2,0.5;Your account balance: $".. atm.balance[player:get_player_name()].. "]" ..
+	"label[2,0.5;Your account balance: ".. atm.balance[player:get_player_name()].. " " .. MONEY_SYMBOL .. "]" ..
 	"label[2.5,1;TRANSACTION SUMMARY:]"..
 	"label[0.5,1.5;Recepient: " .. dstn .. "]"..
 	"label[0.5,2;Amount: " .. amnt .. "]"..
@@ -198,7 +199,7 @@ function atm.showform_wtlist (player, tlist)
 		textlist = "no transactions registered\n"
 	else
 		for _, entry in ipairs(tlist) do
-			textlist = textlist .. entry.date .. " $" .. entry.sum .. " from " .. entry.from .. ": " .. entry.desc .. "\n"
+			textlist = textlist .. entry.date .. " " .. entry.sum .. " " .. MONEY_SYMBOL .. " from " .. entry.from .. ": " .. entry.desc .. "\n"
 		end
 	end
 
@@ -209,7 +210,7 @@ function atm.showform_wtlist (player, tlist)
 	default.gui_slots..
 	"button[5.75,0;2,1;transfer;< Transfer money]" ..
 	"label[2.5,0;Wire Transfer Terminal]" ..
-	"label[2,0.5;Your account balance: $".. atm.balance[player:get_player_name()].. "]" ..
+	"label[2,0.5;Your account balance: ".. atm.balance[player:get_player_name()].. " " .. MONEY_SYMBOL .. "]" ..
 	"textarea[0.5,1.25;7.5,4;hst;Transaction list;" .. textlist .. "]" ..
 	"button_exit[0.2,5;1,1;Quit;Quit]" ..
 	"button[4.7,5;3,1;clr;Clear transactions]"
