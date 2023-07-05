@@ -2,18 +2,6 @@
 local mg50_exists = minetest.registered_items["currency:minegeld_50"] ~= nil
 local mg100_exists = minetest.registered_items["currency:minegeld_100"] ~= nil
 
--- Helper function to dynamically show or hide sections of a formspec
--- if a currency item is missing
-local mg = function(count, str)
-	if count == 50 and mg50_exists then
-		return str
-	elseif count == 100 and mg100_exists then
-		return str
-	else
-		return ""
-	end
-end
-
 -- abbreviation/symbol of the currency
 local MONEY_SYMBOL = "Mg" -- Mg = Minegeld
 
@@ -41,8 +29,10 @@ local create_currency_buttons = function(cols, rows, xstart, ystart, gap)
 		end
 		local multiplier = denom * (10 ^ (r-1))
 		local rowname = rownames[r]
-		formstring = formstring .. "item_image_button["..x..","..y..";1,1;"..item..";"..rowname..tostring(multiplier)..";\n\n\b\b\b\b\b"..tostring(amount).."]"
-		formstring = formstring .. "item_image_button["..xo..","..y..";1,1;"..item..";"..rowname..tostring(-multiplier)..";\n\n\b\b\b\b\b"..tostring(amount).."]"
+		formstring = formstring .. "item_image_button["..x..","..y..";1,1;"..item..";"..
+				rowname..tostring(multiplier)..";\n\n\b\b\b\b\b"..tostring(amount).."]"
+		formstring = formstring .. "item_image_button["..xo..","..y..";1,1;"..item..";"..
+				rowname..tostring(-multiplier)..";\n\n\b\b\b\b\b"..tostring(amount).."]"
 	end
 	end
 	return formstring
@@ -199,7 +189,8 @@ function atm.showform_wtlist (player, tlist)
 		textlist = "no transactions registered\n"
 	else
 		for _, entry in ipairs(tlist) do
-			textlist = textlist .. entry.date .. " " .. entry.sum .. " " .. MONEY_SYMBOL .. " from " .. entry.from .. ": " .. entry.desc .. "\n"
+			textlist = textlist .. entry.date .. " " .. entry.sum .. " " .. MONEY_SYMBOL ..
+					" from " .. entry.from .. ": " .. entry.desc .. "\n"
 		end
 	end
 
